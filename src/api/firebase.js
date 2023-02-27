@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { v4 as uuid } from "uuid";
 import {
   getAuth,
   signInWithPopup,
@@ -6,7 +7,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getDatabase, ref, get } from "firebase/database";
+import { getDatabase, ref, set, get } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -54,4 +55,16 @@ async function adminUser(user) {
     .catch((error) => {
       console.error(error);
     });
+}
+
+// 새로운 제품을 등록하는 함수
+export async function addNewProduct(product, image) {
+  const id = uuid();
+  set(ref(database, `products/${id}`), {
+    ...product,
+    id,
+    price: parseInt(product.price),
+    image,
+    options: product.options.split(","),
+  });
 }

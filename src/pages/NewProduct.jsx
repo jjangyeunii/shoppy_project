@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { addNewProduct } from "../api/firebase";
 import { uploadImage } from "../api/uploader";
 import Button from "../components/ui/Button";
 
@@ -20,6 +21,7 @@ export default function NewProduct() {
     uploadImage(file).then((url) => {
       console.log(url);
       // Firebase에 새로운 제품을 추가
+      addNewProduct(product, url);
     });
   };
 
@@ -55,6 +57,14 @@ export default function NewProduct() {
           name="category"
           value={product.category ?? ""}
           placeholder="카테고리"
+          required
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="description"
+          value={product.description ?? ""}
+          placeholder="제품 설명"
           required
           onChange={handleChange}
         />
