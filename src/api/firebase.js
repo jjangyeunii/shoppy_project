@@ -20,6 +20,7 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 const database = getDatabase(app);
 
+// 자동로그인 방지
 provider.setCustomParameters({
   prompt: "select_account",
 });
