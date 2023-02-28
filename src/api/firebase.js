@@ -7,7 +7,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getDatabase, ref, set, get } from "firebase/database";
+import { getDatabase, ref, set, get, remove } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -42,6 +42,7 @@ export function onUserStateChange(callback) {
   });
 }
 
+// 관리자인지 확인하는 함수
 async function adminUser(user) {
   return get(ref(database, "admins"))
     .then((snapshot) => {
@@ -69,7 +70,7 @@ export async function addNewProduct(product, image) {
   });
 }
 
-// 제품들을 가져오는 함수
+// 모든 제품들을 가져오는 함수
 export async function getProducts() {
   return get(ref(database, "products")).then((snapshot) => {
     if (snapshot.exists()) {
@@ -77,4 +78,22 @@ export async function getProducts() {
     }
     return [];
   });
+}
+
+// 사용자의 카트정보를 가져오는 함수
+export async function getCart(userId) {
+  return get(ref(database, `carts/${userId}`)).then((snapshot) => {
+    const item = snapshot.val() || {};
+    return Object.values(item);
+  });
+}
+
+// 사용자의 상품 추가 및 없데이트
+export async function addOrUpdateToCart(userId, product) {
+  return set(ref(database, `carts/${userId}/${product.id}`), product);
+}
+
+// 사용자의 상품 삭제
+export async function removeFromCart(userId, product) {
+  return remove(ref(database, `carts/${userId}/${product.id}`));
 }
