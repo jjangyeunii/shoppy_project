@@ -94,6 +94,6 @@ export async function addOrUpdateToCart(userId, product) {
 }
 
 // 사용자의 상품 삭제
-export async function removeFromCart(userId, product) {
-  return remove(ref(database, `carts/${userId}/${product.id}`));
+export async function removeFromCart(userId, productId) {
+  return remove(ref(database, `carts/${userId}/${productId}`));
 }
