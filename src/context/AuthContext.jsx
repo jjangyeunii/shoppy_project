@@ -7,10 +7,7 @@ export function AuthContextProvider({ children }) {
   const [user, setUser] = useState();
   useEffect(() => {
     // (user) => setUser(user)와 같음
-    onUserStateChange((user) => {
-      console.log(user);
-      setUser(user);
-    });
+    onUserStateChange((user) => setUser(user));
   }, []);
   return (
     <AuthContext.Provider

@@ -1,8 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { addNewProduct } from "../api/firebase";
 import { uploadImage } from "../api/uploader";
 import Button from "../components/ui/Button";
+import useProducts from "../hooks/useProducts";
 
 export default function NewProduct() {
   const [product, setProduct] = useState({});
@@ -10,13 +9,7 @@ export default function NewProduct() {
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState();
 
-  const queryClient = useQueryClient();
-  const addProduct = useMutation(
-    ({ product, url }) => addNewProduct(product, url),
-    {
-      onSuccess: () => queryClient.invalidateQueries(["products"]),
-    }
-  );
+  const { addProduct } = useProducts();
 
   // handleChane 함수는 input 태그에 공통적으로 쓰이는 함수
   const handleChange = (e) => {
