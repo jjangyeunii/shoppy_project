@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { FaEquals } from "react-icons/fa";
 import CartItem from "../components/CartItem";
 import PriceCard from "../components/PriceCard";
 import Button from "../components/ui/Button";
 import useCart from "../hooks/useCart";
+import useProducts from "../hooks/useProducts";
 
 const SHIPPING = 3000;
 
 export default function MyCart() {
   const {
+    removeItem,
     cartQuery: { isLoading, data: products },
   } = useCart();
+
+  const {
+    productsQuery: { data: productsData },
+  } = useProducts();
+
+  useEffect(() => {
+    const productsIdList =
+      productsData && productsData.map((product) => product.id);
+    const cartIdList = products && products.map((product) => product.id);
+    const deletedItems = cartIdList.filter(
+      (id) => !productsIdList.includes(id)
+    );
+    if (deletedItems.length > 0) {
+      deletedItems.map((id) => removeItem.mutate(id));
+    }
+  }, []);
 
   if (isLoading) return <p>Loading...</p>;
 

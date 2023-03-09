@@ -1,5 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getProducts as fetchProducts, addNewProduct } from "../api/firebase";
+import {
+  getProducts as fetchProducts,
+  addNewProduct,
+  removeFromProducts,
+} from "../api/firebase";
 
 export default function useProducts() {
   const queryClient = useQueryClient();
@@ -15,5 +19,9 @@ export default function useProducts() {
     }
   );
 
-  return { productsQuery, addProduct };
+  const deleteProduct = useMutation((id) => removeFromProducts(id), {
+    onSuccess: () => queryClient.invalidateQueries(["products"]),
+  });
+
+  return { productsQuery, addProduct, deleteProduct };
 }
