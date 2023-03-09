@@ -11,6 +11,7 @@ import NewProduct from "./pages/NewProduct";
 import ProductDetail from "./pages/ProductDetail";
 import MyCart from "./pages/MyCart";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import DeleteProduct from "./pages/DeleteProduct";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute reqiureAdmin>
             <NewProduct />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/products/delete",
+        element: (
+          <ProtectedRoute reqiureAdmin>
+            <DeleteProduct />
           </ProtectedRoute>
         ),
       },

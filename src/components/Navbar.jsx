@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FcInTransit } from "react-icons/fc";
-import { FaPencilAlt } from "react-icons/fa";
+import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 import User from "./User";
 import Button from "./ui/Button";
 import { useAuthContext } from "../context/AuthContext";
@@ -24,9 +24,14 @@ export default function Navbar() {
           </Link>
         )}
         {user && user.isAdmin && (
-          <Link to="products/new" className="text-2xl">
-            <FaPencilAlt />
-          </Link>
+          <>
+            <Link to="products/new" className="text-2xl">
+              <FaPencilAlt />
+            </Link>
+            <Link to="products/delete" className="text-2xl">
+              <FaRegTrashAlt />
+            </Link>
+          </>
         )}
         {user && <User user={user} />}
         {!user && <Button text={"Login"} onClick={login} />}
