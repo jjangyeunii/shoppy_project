@@ -10,7 +10,7 @@ export default function DeleteProducts() {
     <>
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-      <ul>
+      <ul className="px-8 p-4">
         {products &&
           products.map((product) => (
             <DeleteProductCard key={product.id} product={product} />
