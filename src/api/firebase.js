@@ -80,6 +80,16 @@ export async function getProducts() {
   });
 }
 
+// 모든 사용자 카트정보 가져오는 함수
+export async function getAllCart() {
+  return get(ref(database, "carts")).then((snapshot) => {
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    }
+    return [];
+  });
+}
+
 // 사용자의 카트정보를 가져오는 함수
 export async function getCart(userId) {
   return get(ref(database, `carts/${userId}`)).then((snapshot) => {

@@ -8,6 +8,7 @@ export default function DeleteProductCard({
   product: { id, image, title, category, price, description },
 }) {
   const { deleteProduct } = useProducts();
+
   const handleDelete = () => {
     if (window.confirm("상품을 삭제하시겠습니까?")) {
       deleteProduct.mutate(id);

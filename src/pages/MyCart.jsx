@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { FaEquals } from "react-icons/fa";
 import CartItem from "../components/CartItem";
@@ -6,6 +6,7 @@ import PriceCard from "../components/PriceCard";
 import Button from "../components/ui/Button";
 import useCart from "../hooks/useCart";
 import useProducts from "../hooks/useProducts";
+import axios from "axios";
 
 const SHIPPING = 3000;
 
@@ -41,6 +42,34 @@ export default function MyCart() {
       0
     );
 
+  const payParams = {
+    cid: "TC0ONETIME",
+    partner_order_id: "partner_order_id",
+    partner_user_id: "partner_user_id",
+    item_name: "장바구니 상품",
+    quantity: 1,
+    total_amount: totalPrice,
+    vat_amount: parseInt(totalPrice / 11),
+    tax_free_amount: 0,
+    approval_url: "http://localhost:3000/pay/result",
+    fail_url: "http://localhost:3000",
+    cancel_url: "http://localhost:3000/carts",
+  };
+
+  const handleOrder = () => {
+    axios
+      .post("/v1/payment/ready", payParams, {
+        headers: {
+          Authorization: `KakaoAK ${process.env.REACT_APP_KAKAOPAY_ADMIN_KEY}`,
+          "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+        },
+      })
+      .then((res) => {
+        localStorage.setItem("tid", res.data.tid);
+        window.location.href = res.data.next_redirect_pc_url;
+      });
+  };
+
   return (
     <section className="p-8 flex flex-col">
       <p className="text-2xl text-center font-bold pb-4 border-b border-gray-300">
@@ -62,7 +91,7 @@ export default function MyCart() {
             <FaEquals className="shrink-0" />
             <PriceCard text="총가격" price={totalPrice + SHIPPING} />
           </div>
-          <Button text="주문하기" />
+          <Button text="주문하기" onClick={handleOrder} />
         </>
       )}
     </section>
