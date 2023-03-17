@@ -8,6 +8,7 @@ module.exports = {
       },
       backgroundImage: {
         banner: `url(../public/images/banner.jpg)`,
+        redirectHome: `url(../public/images/payResultBanner.jpg)`,
       },
     },
   },

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import Button from "../components/ui/Button";
+import RedirectHomeBanner from "../components/RedirectHomeBanner";
 
 export default function PayResult() {
   const pg_token = window.location.search.split("=")[1];
@@ -28,9 +28,8 @@ export default function PayResult() {
   }, []);
 
   return (
-    <section className="flex flex-col justify-center items-center">
-      <h2>결제가 완료되었습니다</h2>
-      <Button text="홈으로 돌아가기" />
-    </section>
+    <>
+      <RedirectHomeBanner />
+    </>
   );
 }

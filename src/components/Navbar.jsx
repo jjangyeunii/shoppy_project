@@ -12,7 +12,7 @@ export default function Navbar() {
 
   return (
     <header className="flex justify-between border-b border-gray-300 p-2">
-      <Link to="/" className="flex items-center text-4xl text-brand">
+      <Link to="/" className="flex items-center text-4xl text-brand font-bold">
         <FcInTransit className="mr-1" />
         <h1>Shoppy</h1>
       </Link>
