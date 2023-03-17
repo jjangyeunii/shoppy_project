@@ -20,6 +20,8 @@ export default function MyCart() {
     productsQuery: { data: productsData },
   } = useProducts();
 
+  const productsId = products.map((product) => product.id);
+
   useEffect(() => {
     const productsIdList =
       productsData && productsData.map((product) => product.id);
@@ -67,7 +69,9 @@ export default function MyCart() {
       .then((res) => {
         localStorage.setItem("tid", res.data.tid);
         window.location.href = res.data.next_redirect_pc_url;
-      });
+        productsId && productsId.map((id) => removeItem.mutate(id));
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
