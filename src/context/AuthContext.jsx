@@ -4,14 +4,18 @@ import { login, logout, onUserStateChange } from "../api/firebase";
 const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
-  const [user, setUser] = useState();
+  const [authState, setAuthState] = useState({ user: null, loading: true });
+  const user = authState.user;
+  const loading = authState.loading;
+
   useEffect(() => {
-    // (user) => setUser(user)와 같음
-    onUserStateChange((user) => setUser(user));
+    onUserStateChange((user) => {
+      setAuthState({ user, loading: false });
+    });
   }, []);
   return (
     <AuthContext.Provider
-      value={{ user, uid: user && user.uid, login, logout }}
+      value={{ loading, user, uid: user && user.uid, login, logout }}
     >
       {children}
     </AuthContext.Provider>

@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       {
         path: "/products/new",
         element: (
-          <ProtectedRoute reqiureAdmin>
+          <ProtectedRoute requireAdmin>
             <NewProduct />
           </ProtectedRoute>
         ),
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       {
         path: "/products/delete",
         element: (
-          <ProtectedRoute reqiureAdmin>
+          <ProtectedRoute requireAdmin>
             <DeleteProduct />
           </ProtectedRoute>
         ),
@@ -49,7 +49,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/pay/result",
-        element: <PayResult />,
+        element: (
+          <ProtectedRoute>
+            <PayResult />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

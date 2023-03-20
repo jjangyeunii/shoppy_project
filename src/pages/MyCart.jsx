@@ -20,16 +20,15 @@ export default function MyCart() {
     productsQuery: { data: productsData },
   } = useProducts();
 
-  const productsId = products.map((product) => product.id);
+  const productsId = products && products.map((product) => product.id);
 
   useEffect(() => {
     const productsIdList =
       productsData && productsData.map((product) => product.id);
     const cartIdList = products && products.map((product) => product.id);
-    const deletedItems = cartIdList.filter(
-      (id) => !productsIdList.includes(id)
-    );
-    if (deletedItems.length > 0) {
+    const deletedItems =
+      cartIdList && cartIdList.filter((id) => !productsIdList.includes(id));
+    if (deletedItems && deletedItems.length > 0) {
       deletedItems.map((id) => removeItem.mutate(id));
     }
   }, []);
