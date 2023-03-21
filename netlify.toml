@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/proxy/*"
+  to = "https://kapi.kakao.com/:splat"
+  status = 200
+  force = true
