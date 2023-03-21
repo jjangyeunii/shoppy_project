@@ -22,6 +22,8 @@ export default function MyCart() {
 
   const productsId = products && products.map((product) => product.id);
 
+  const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
+
   useEffect(() => {
     const productsIdList =
       productsData && productsData.map((product) => product.id);
@@ -59,7 +61,7 @@ export default function MyCart() {
 
   const handleOrder = () => {
     axios
-      .post("/v1/payment/ready", payParams, {
+      .post(`${PROXY}/v1/payment/ready`, payParams, {
         headers: {
           Authorization: `KakaoAK ${process.env.REACT_APP_KAKAOPAY_ADMIN_KEY}`,
           "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
