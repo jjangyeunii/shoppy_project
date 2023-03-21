@@ -1,17 +1,11 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import RedirectHomeBanner from "../components/RedirectHomeBanner";
-import useCart from "../hooks/useCart";
+
+const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
 
 export default function PayResult() {
-  const {
-    removeItem,
-    cartQuery: { isLoading, data: products },
-  } = useCart();
-
   const pg_token = window.location.search.split("=")[1];
-
-  const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
 
   const payParams = {
     cid: "TC0ONETIME",
@@ -22,8 +16,6 @@ export default function PayResult() {
   };
 
   useEffect(() => {
-    const productsId = products && products.map((product) => product.id);
-
     axios
       .post(`${PROXY}/v1/payment/approve`, payParams, {
         headers: {
@@ -32,13 +24,10 @@ export default function PayResult() {
         },
       })
       .then((res) => {
-        // console.log(res.data);
-        productsId && productsId.map((id) => removeItem.mutate(id));
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
-
-  if (isLoading) return <p>Loading...</p>;
 
   return (
     <>

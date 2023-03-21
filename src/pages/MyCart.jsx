@@ -10,6 +10,20 @@ import axios from "axios";
 
 const SHIPPING = 3000;
 
+const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
+const APPROVAL_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000/pay/result"
+    : "https://marvelous-klepon-7c123d.netlify.app/pay/result";
+const FAIL_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://marvelous-klepon-7c123d.netlify.app";
+const CANCEL_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000/carts"
+    : "https://marvelous-klepon-7c123d.netlify.app/carts";
+
 export default function MyCart() {
   const {
     removeItem,
@@ -20,21 +34,7 @@ export default function MyCart() {
     productsQuery: { data: productsData },
   } = useProducts();
 
-  // const productsId = products && products.map((product) => product.id);
-
-  const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
-  const APPROVAL_URL =
-    window.location.hostname === "localhost"
-      ? "http://localhost:3000/pay/result"
-      : "https://marvelous-klepon-7c123d.netlify.app/pay/result";
-  const FAIL_URL =
-    window.location.hostname === "localhost"
-      ? "http://localhost:3000"
-      : "https://marvelous-klepon-7c123d.netlify.app";
-  const CANCEL_URL =
-    window.location.hostname === "localhost"
-      ? "http://localhost:3000/carts"
-      : "https://marvelous-klepon-7c123d.netlify.app/carts";
+  const productsId = products && products.map((product) => product.id);
 
   useEffect(() => {
     const productsIdList =
@@ -82,7 +82,7 @@ export default function MyCart() {
       .then((res) => {
         localStorage.setItem("tid", res.data.tid);
         window.location.href = res.data.next_redirect_pc_url;
-        // productsId && productsId.map((id) => removeItem.mutate(id));
+        productsId && productsId.map((id) => removeItem.mutate(id));
       })
       .catch((err) => console.log(err));
   };
