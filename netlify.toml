@@ -5,6 +5,6 @@
   force = true
 
 [[redirects]]
-  from = "/products"
-  to = "/products"
+  from = "/*"
+  to = "/index.html"
   status = 200
