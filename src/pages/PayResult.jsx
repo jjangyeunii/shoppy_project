@@ -5,6 +5,8 @@ import RedirectHomeBanner from "../components/RedirectHomeBanner";
 export default function PayResult() {
   const pg_token = window.location.search.split("=")[1];
 
+  const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
+
   const payParams = {
     cid: "TC0ONETIME",
     tid: localStorage.getItem("tid"),
@@ -15,7 +17,7 @@ export default function PayResult() {
 
   useEffect(() => {
     axios
-      .post("/v1/payment/approve", payParams, {
+      .post(`${PROXY}/v1/payment/approve`, payParams, {
         headers: {
           Authorization: `KakaoAK ${process.env.REACT_APP_KAKAOPAY_ADMIN_KEY}`,
           "Content-type": "application/x-www-form-urlencoded;charset=utf-8",

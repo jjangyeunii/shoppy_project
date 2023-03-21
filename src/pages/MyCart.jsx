@@ -23,6 +23,18 @@ export default function MyCart() {
   const productsId = products && products.map((product) => product.id);
 
   const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
+  const APPROVAL_URL =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3000/pay/result"
+      : "https://marvelous-klepon-7c123d.netlify.app/pay/result";
+  const FAIL_URL =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://marvelous-klepon-7c123d.netlify.app";
+  const CANCEL_URL =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3000/carts"
+      : "https://marvelous-klepon-7c123d.netlify.app/carts";
 
   useEffect(() => {
     const productsIdList =
@@ -54,9 +66,9 @@ export default function MyCart() {
     total_amount: totalPrice,
     vat_amount: parseInt(totalPrice / 11),
     tax_free_amount: 0,
-    approval_url: "http://localhost:3000/pay/result",
-    fail_url: "http://localhost:3000",
-    cancel_url: "http://localhost:3000/carts",
+    approval_url: APPROVAL_URL,
+    fail_url: FAIL_URL,
+    cancel_url: CANCEL_URL,
   };
 
   const handleOrder = () => {
