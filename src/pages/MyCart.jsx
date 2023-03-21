@@ -20,7 +20,7 @@ export default function MyCart() {
     productsQuery: { data: productsData },
   } = useProducts();
 
-  const productsId = products && products.map((product) => product.id);
+  // const productsId = products && products.map((product) => product.id);
 
   const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
   const APPROVAL_URL =
@@ -41,7 +41,7 @@ export default function MyCart() {
       productsData && productsData.map((product) => product.id);
     const cartIdList = products && products.map((product) => product.id);
     const deletedItems =
-      cartIdList && cartIdList.filter((id) => !productsIdList.includes(id));
+      cartIdList && cartIdList.filter((id) => !productsIdList?.includes(id));
     if (deletedItems && deletedItems.length > 0) {
       deletedItems.map((id) => removeItem.mutate(id));
     }
@@ -82,7 +82,7 @@ export default function MyCart() {
       .then((res) => {
         localStorage.setItem("tid", res.data.tid);
         window.location.href = res.data.next_redirect_pc_url;
-        productsId && productsId.map((id) => removeItem.mutate(id));
+        // productsId && productsId.map((id) => removeItem.mutate(id));
       })
       .catch((err) => console.log(err));
   };
