@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Button from "../components/ui/Button";
+import { useAuthContext } from "../context/AuthContext";
 import useCart from "../hooks/useCart";
 
 export default function ProductDetail() {
+  const { user } = useAuthContext();
   const { addOrUpdateItem } = useCart();
   const {
     state: {
@@ -17,12 +19,17 @@ export default function ProductDetail() {
   const handleClick = (e) => {
     // 여기서 장바구니에 추가!
     const product = { id, image, title, price, option: selected, quantity: 1 };
-    addOrUpdateItem.mutate(product, {
-      onSuccess: () => {
-        setSuccess("장바구니에 추가되었습니다.");
-        setTimeout(() => setSuccess(null), 3000);
-      },
-    });
+    if (user) {
+      addOrUpdateItem.mutate(product, {
+        onSuccess: () => {
+          setSuccess("✅장바구니에 추가되었습니다.");
+          setTimeout(() => setSuccess(null), 3000);
+        },
+      });
+    } else {
+      setSuccess("❗️로그인해주세요❗️");
+      setTimeout(() => setSuccess(null), 2000);
+    }
   };
 
   return (
@@ -52,7 +59,7 @@ export default function ProductDetail() {
                 ))}
             </select>
           </div>
-          {success && <p className="my-2">✅{success}</p>}
+          {success && <p className="my-2">{success}</p>}
           <Button text="장바구니에 추가" onClick={handleClick} />
         </div>
       </section>
