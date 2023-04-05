@@ -33,8 +33,8 @@ export default function ProductDetail() {
   };
 
   return (
-    <>
-      <p className="mx-12 mt-4 text-gray-700">{category}</p>
+    <section className="dark:bg-gray-800 dark:text-gray-100">
+      <p className="mx-12 pt-4 text-gray-700  dark:text-gray-300">{category}</p>
       <section className="flex flex-col md:flex-row p-4">
         <img className="w-full px-4 basis-7/12" src={image} alt={title} />
         <div className="w-full p-4 basis-5/12 flex flex-col">
@@ -49,7 +49,7 @@ export default function ProductDetail() {
             </label>
             <select
               id="select"
-              className="p-2 m-4 flex-1 border-2 border-dashed border-brand outline-none"
+              className="p-2 m-4 flex-1 border-2 border-dashed border-brand outline-none dark:text-gray-800"
               onChange={handleSelect}
               value={selected}
             >
@@ -63,6 +63,6 @@ export default function ProductDetail() {
           <Button text="장바구니에 추가" onClick={handleClick} />
         </div>
       </section>
-    </>
+    </section>
   );
 }

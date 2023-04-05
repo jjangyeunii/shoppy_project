@@ -88,7 +88,7 @@ export default function MyCart() {
   };
 
   return (
-    <section className="p-8 flex flex-col">
+    <section className="p-8 flex flex-col dark:bg-gray-800 dark:text-gray-100">
       <p className="text-2xl text-center font-bold pb-4 border-b border-gray-300">
         내 장바구니
       </p>

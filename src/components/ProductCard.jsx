@@ -9,14 +9,14 @@ export default function ProductCard({
   return (
     <li
       onClick={() => navigate(`/products/${id}`, { state: { product } })}
-      className="rounded-md shadow-md overflow-hidden cursor-pointer transition-all hover:scale-105"
+      className="rounded-md shadow-md overflow-hidden cursor-pointer transition-all hover:scale-105 dark:bg-gray-600"
     >
       <img className="w-full" src={image} alt={title} />
-      <div className="mt-2 px-2 text-lg flex justify-between items-center">
+      <div className="mt-2 px-2 text-lg flex justify-between items-center dark:text-gray-100">
         <h3 className="truncate">{title}</h3>
         <p>{`₩${price}`}</p>
       </div>
-      <p className="mb-2 px-2 text-gray-600">{category}</p>
+      <p className="mb-2 px-2 text-gray-600 dark:text-gray-300">{category}</p>
     </li>
   );
 }
