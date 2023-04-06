@@ -88,11 +88,15 @@ export default function MyCart() {
   };
 
   return (
-    <section className="p-8 flex flex-col h-screen dark:bg-gray-800 dark:text-gray-100">
+    <section className="p-8 flex flex-col dark:bg-gray-800 dark:text-gray-100">
       <p className="text-2xl text-center font-bold pb-4 border-b border-gray-300">
         내 장바구니
       </p>
-      {!hasProducts && <p>장바구니에 상품이 없습니다. 열심히 쇼핑해 주세요!</p>}
+      {!hasProducts && (
+        <p className="h-screen">
+          장바구니에 상품이 없습니다. 열심히 쇼핑해 주세요!
+        </p>
+      )}
       {hasProducts && (
         <>
           <ul className="border-b border-gray-300 mb-8 p-4 px-8">

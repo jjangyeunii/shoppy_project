@@ -45,7 +45,7 @@ export default function NewProduct() {
   };
 
   return (
-    <section className="w-full h-screen text-center dark:bg-gray-800 dark:text-gray-100">
+    <section className="w-full text-center dark:bg-gray-800 dark:text-gray-100">
       <h2 className="text-2xl font-bold py-4">새로운 제품 등록</h2>
       {success && <p className="my-2">✅ {success}</p>}
       {file && (
@@ -55,7 +55,7 @@ export default function NewProduct() {
           alt="local file"
         />
       )}
-      <form className="flex flex-col px-12" onSubmit={handleSubmit}>
+      <form className="flex flex-col h-screen px-12" onSubmit={handleSubmit}>
         <input
           type="file"
           accept="image/*"
