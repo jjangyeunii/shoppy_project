@@ -3,7 +3,7 @@ import DeleteProducts from "../components/DeleteProducts";
 
 export default function DeleteProduct() {
   return (
-    <section className="p-4 flex flex-col">
+    <section className="p-4 flex flex-col dark:bg-gray-800 dark:text-gray-100">
       <h2 className="text-2xl text-center font-bold pb-4 border-b border-gray-300">
         기존 제품 삭제
       </h2>

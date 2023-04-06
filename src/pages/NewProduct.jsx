@@ -3,6 +3,8 @@ import { uploadImage } from "../api/uploader";
 import Button from "../components/ui/Button";
 import useProducts from "../hooks/useProducts";
 
+const INPUT_CLASS = "dark:bg-gray-800 dark:placeholder:text-gray-200";
+
 export default function NewProduct() {
   const [product, setProduct] = useState({});
   const [file, setFile] = useState();
@@ -43,8 +45,8 @@ export default function NewProduct() {
   };
 
   return (
-    <section className="w-full text-center">
-      <h2 className="text-2xl font-bold my-4">새로운 제품 등록</h2>
+    <section className="w-full h-screen text-center dark:bg-gray-800 dark:text-gray-100">
+      <h2 className="text-2xl font-bold py-4">새로운 제품 등록</h2>
       {success && <p className="my-2">✅ {success}</p>}
       {file && (
         <img
@@ -68,6 +70,7 @@ export default function NewProduct() {
           placeholder="제품명"
           required
           onChange={handleChange}
+          className={INPUT_CLASS}
         />
         <input
           type="number"
@@ -76,6 +79,7 @@ export default function NewProduct() {
           placeholder="가격"
           required
           onChange={handleChange}
+          className={INPUT_CLASS}
         />
         <input
           type="text"
@@ -84,6 +88,7 @@ export default function NewProduct() {
           placeholder="카테고리"
           required
           onChange={handleChange}
+          className={INPUT_CLASS}
         />
         <input
           type="text"
@@ -92,6 +97,7 @@ export default function NewProduct() {
           placeholder="제품 설명"
           required
           onChange={handleChange}
+          className={INPUT_CLASS}
         />
         <input
           type="text"
@@ -100,6 +106,7 @@ export default function NewProduct() {
           placeholder="옵션들(콤마(,)로 구분)"
           required
           onChange={handleChange}
+          className={INPUT_CLASS}
         />
         <Button
           text={isUploading ? "업로드 중..." : "제품 등록하기"}

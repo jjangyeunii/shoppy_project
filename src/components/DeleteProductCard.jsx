@@ -18,7 +18,7 @@ export default function DeleteProductCard({
   };
   const navigate = useNavigate();
   return (
-    <li className="flex justify-between my-2 items-center">
+    <li className="flex justify-between my-4 items-center">
       <img
         className="w-24 md:w-48 lg:w-56 rounded-lg hover:scale-105"
         src={image}
@@ -33,7 +33,7 @@ export default function DeleteProductCard({
         </div>
         <p className="font-bold md:text-lg">{category}</p>
         <RiDeleteBin5Fill
-          className="transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1 text-2xl md:text-3xl"
+          className="transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1 text-2xl md:text-3xl dark:hover:text-purple-400"
           onClick={handleDelete}
         />
       </div>
